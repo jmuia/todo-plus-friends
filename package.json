@@ -10,6 +10,6 @@
     "kik-lib" : "1.0.0"
   },
   "scripts" : {
-    "start" : "zerver -r web"
+    "start" : "zerver web"
   }
 }
