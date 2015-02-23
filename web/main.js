@@ -4,6 +4,12 @@
     try {
         App.restore();
     } catch (err) {
-        App.load('home');
+        if (kik.haspermission) {
+            App.load('home');    
+        } else {
+            App.load('signup')
+        }
+        
     }
+
 })(App);

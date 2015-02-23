@@ -1,0 +1,17 @@
+{
+    "name": "Montreal",
+    "todo_items": [
+        {
+            "completed": true,
+            "description": "Arrive at hotel"
+        },
+        {
+            "completed": false,
+            "description": "Visit the biodome"
+        },
+        {
+            "completed": false,
+            "description": "Shopping"
+        }
+    ]
+}

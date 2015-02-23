@@ -1,0 +1,43 @@
+[{
+    "name": "Montreal",
+    "todo_items": [
+        {
+            "completed": true,
+            "description": "Arrive at hotel"
+        },
+        {
+            "completed": false,
+            "description": "Visit the biodome"
+        },
+        {
+            "completed": false,
+            "description": "Shopping"
+        }
+    ]
+},
+{
+    "name": "Personal",
+    "todo_items": [
+        {
+            "completed": true,
+            "description": "Clean room"
+        },
+        {
+            "completed": true,
+            "description": "Marking"
+        },
+        {
+            "completed": true,
+            "description": "Study"
+        }
+    ]
+},
+{
+    "name": "Today",
+    "todo_items": [
+        {
+            "completed": false,
+            "description": "Sleep"
+        }
+    ]
+}]
