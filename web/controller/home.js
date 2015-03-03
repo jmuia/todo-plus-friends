@@ -3,35 +3,17 @@ App.controller('home', function (page) {
     var $lists = $(page).find('ul.app-list');
 
     function fetchLists(username) {
-        console.log('fetchLists');
-        var get_payload = '/users/'+username;
-        kik.sign(get_payload, function (signedData, username, host) {
-            if (!signedData) {
+        API.auth('GET','/users/'+username, '', function (res, status) {
+            if (status !== 200) {
+                App.dialog({
+                    title        : 'Sign in failed',
+                    text         : 'Looks like there was an issue signing in. Try again in a bit.',
+                    cancelButton : 'Close'
+                });
             } else {
-                $.ajax({
-                    type: 'GET',
-                    url: 'http://localhost:8080/users/'+username,
-                    headers: {
-                        'X-Kik-JWS': signedData
-                    },
-                    data: {
-                        'u': username,
-                        'd': host
-                    },
-                    success: function(data){
-                        console.log(data);
-                        data.todo_lists.forEach(function (todo) {
-                            var obs = observable(todo);
-                            App.lists.addList(obs);
-                        });
-                    },
-                    error: function(xhr, type){
-                        App.dialog({
-                          title        : 'Sign in failed',
-                          text         : 'Looks like there was an issue signing in. Try again in a bit.',
-                          cancelButton : 'Close'
-                        });
-                    }
+                res.todo_lists.forEach(function (todo) {
+                    var obs = observable(todo);
+                    App.lists.addList(obs);
                 });
             }
         });
