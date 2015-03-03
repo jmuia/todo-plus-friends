@@ -54,3 +54,9 @@
     padding-top: 15px;
     font-size: 30px;
 }
+
+[contenteditable=true]:empty:before{
+  content: attr(placeholder);
+  color: rgba(243, 244, 245, 0.4);
+  display: block; /* For Firefox */
+}
