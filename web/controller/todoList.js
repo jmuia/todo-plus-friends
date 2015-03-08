@@ -22,7 +22,7 @@ App.controller('todoList', function (page, object) {
 
 
     // Tear Down / Save Changes  ------------------------------------------------------------------
-    $(page).on('appBack', function () {
+    $(page).on('appBeforeBack', function () {
         todoList.items = [];
         todoList.name = $appTitle.text();
 
@@ -68,39 +68,25 @@ App.controller('todoList', function (page, object) {
     };
 
     function saveTodoList(method, todoList) {
-        var putUrl = "";
+        var url = '/todo-lists';
         if (method === "PUT") {
-            putUrl = "/"+todoList.id;
+            url += "/"+todoList.id;
         }
 
-        kik.sign(JSON.stringify(todoList), function (signedData, username, host) {
-            if (!signedData) {
+        API.auth(method, url, todoList, function (res, status) {
+            if (status !== 200) {
                 App.dialog({
-                          title        : 'Todo List Not Saved',
-                          text         : 'Looks like there was an issue saving the todo list.',
-                          cancelButton : 'Close'
+                    title        : 'Sign in failed',
+                    text         : 'Looks like there was an issue signing in. Try again in a bit.',
+                    okButton     : "Ok",
+                    cancelButton : 'Discard Changes'
                 });
             } else {
-                $.ajax({
-                    type: method,
-                    url: 'http://localhost:8080/todo-lists' + putUrl,
-                    data: signedData,
-                    success: function(data){
-                        console.log(data);
-                        if (method === "POST") {
-                            App.lists.addList(observable(data));
-                        } else {
-                            todoObserver(data);
-                        }
-                    },
-                    error: function(xhr, type){
-                        App.dialog({
-                          title        : 'Todo List Not Saved',
-                          text         : 'Looks like there was an issue saving the todo list.',
-                          cancelButton : 'Close'
-                        });
-                    }
-                });
+                if (method === "POST") {
+                    App.lists.addList(observable(res));
+                } else {
+                    todoObserver(res);
+                }
             }
         });
     };
@@ -124,12 +110,10 @@ App.controller('todoList', function (page, object) {
                 if ( !users ) {
                     // action was cancelled by user
                 } else {
-                    console.log(todoList.users);
                     todoList.users = []
                     users.forEach(function (user) {
                         todoList.users.push(user.username);
                     });
-                    console.log(todoList.users);
                 }
             });
         });
