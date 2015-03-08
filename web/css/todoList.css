@@ -1,0 +1,21 @@
+/* put stuff here */
+
+.todoList-page {}
+
+.todoList-page .app-button.right {
+    background-image: url('/img/group_add.png');
+    background-repeat: no-repeat;
+    background-size: 24px 24px;
+    background-position: center;
+    width: 22px;
+}
+
+.app-android .todoList-page .app-button.right {
+    padding: 0 16px;
+    height: 56px;
+}
+
+.app-ios .todoList-page .app-button.right {
+    padding: 15px 0 15px 27px;
+    height: 14px;
+}

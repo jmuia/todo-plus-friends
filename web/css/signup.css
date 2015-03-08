@@ -1,0 +1,11 @@
+.signup-page {}
+
+.signup-page .app-content {
+    background-color: #9b59b6;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+}

@@ -3,7 +3,7 @@ App.controller('home', function (page) {
     var $lists = $(page).find('ul.app-list');
 
     function fetchLists(username) {
-        API.auth('GET','/users/'+username, '', function (res, status) {
+        API.auth('GET','/users/'+username+'/todo-lists', '', function (res, status) {
             if (status !== 200) {
                 App.dialog({
                     title        : 'Sign in failed',
@@ -11,12 +11,18 @@ App.controller('home', function (page) {
                     cancelButton : 'Close'
                 });
             } else {
-                res.todo_lists.forEach(function (todo) {
+                console.log(res);
+                res.forEach(function (todo) {
                     var obs = observable(todo);
                     App.lists.addList(obs);
                 });
             }
         });
+    };
+
+    function bindValue(input, property, observable) {
+      input.value = observable();
+      observable.subscribe(function(){ input.value = observable(); });
     };
 
     App.lists.subscribe(function (obs) {
@@ -40,7 +46,11 @@ App.controller('home', function (page) {
     });
 
     // Setup listener for new list
-    var $newList = $(page).find('.android-new');
+    if (kik.utils.platform.os.name === 'android') {
+        var $newList = $(page).find('.android-add-button');
+    } else {
+        var $newList = $(page).find('.ios-add-button');
+    }
     $newList.on('click', function (event) {
         App.load('todoList');
     });

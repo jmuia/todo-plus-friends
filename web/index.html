@@ -13,17 +13,18 @@
         <!-- Styles -->
         <link rel="stylesheet" href="//cdn.kik.com/app/3.0.1/app.min.css">
         <link rel="stylesheet" href="/css/styles.css">
+        <link rel="stylesheet" href="/css/signup.css">
         <link rel="stylesheet" href="/css/home.css">
-        <link rel="stylesheet" href="/css/page2.css">
+        <link rel="stylesheet" href="/css/todoList.css">
     </head>
 
     <body>
         <!-- Pages -->
         <div class="app-page signup-page" data-page="signup">
-            <div class="app-topbar purple">
-                <div class="app-title">Todo+u</div>
-            </div>
             <div class="app-content">
+                <img src="/img/check.png">
+                <h1>Todo+Friends</h1>
+                <div>Share todo lists with friends</div>
                 <div class="app-section">
                     <div class="app-button" id="sign-in">Sign in with Kik</div>
                 </div>
@@ -33,6 +34,7 @@
         <div class="app-page home-page" data-page="home">
             <div class="app-topbar purple">
                 <div class="app-title">Todo+u</div>
+                <div class="app-button ios-add-button right"></div>
             </div>
             <div class="app-content">
                 <ul class="app-list">
@@ -40,8 +42,8 @@
                 </ul>
             </div>
 
-            <div class="android-new">
-                <div class="plus">+</div>
+            <div class="android-add-button">
+                <div>+</div>
             </div>
         </div>
 
@@ -49,6 +51,7 @@
             <div class="app-topbar purple">
                 <div class="app-button left" data-back data-autotitle></div>
                 <div class="app-title editable" contenteditable="true" placeholder="Title"></div>
+                <div class="app-button right"></div>
             </div>
             <div class="app-content">
                 <div class="todos">
@@ -57,10 +60,6 @@
                         <input class="app-input" type="checkbox">
                     </div>
                 </div>
-            </div>
-
-            <div class="android-new">
-                <div class="plus">+</div>
             </div>
         </div>
 

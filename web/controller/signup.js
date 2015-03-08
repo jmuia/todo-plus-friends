@@ -9,7 +9,7 @@ App.controller('signup', function (page) {
                     cancelButton : 'Close'
                 });
             } else {
-                App.load('home', res.todo_lists);
+                App.load('home');
             }
         });
     });
