@@ -8,6 +8,7 @@ App.controller('todoList', function (page, object) {
     var $tmpl = $(page).find('.todo-item').remove();
     var $todos = $(page).find('.todos');
     var $shareBtn = $(page).find('.app-button.right');
+    var $backBtn = $(page).find('.app-button.left');
     
     if (typeof(object.observer) === "undefined") {
         isNewList = true;
@@ -18,32 +19,6 @@ App.controller('todoList', function (page, object) {
     }
 
     setupView(todoList);
-
-
-
-    // Tear Down / Save Changes  ------------------------------------------------------------------
-    $(page).on('appBeforeBack', function () {
-        todoList.items = [];
-        todoList.name = $appTitle.text();
-
-        children = $todos.children();
-        children.each(function (index, child) {
-            if (index === children.length-1) return false;
-
-            var todo = {};
-            todo.description = $(child).find('.app-input[type="input"]').val();
-            todo.completed = $(child).find('.app-input[type="checkbox"]').prop("checked");
-            todoList.items.push(todo);
-        });
-
-        if (isNewList) {
-            if (todoList.name.length > 0 && todoList.items.length > 0) {
-                saveTodoList("POST", todoList);  
-            }
-        } else {
-            saveTodoList("PUT", todoList); 
-        }
-    });
 
     function appendEmptyTodo() {
         var $todo = $tmpl.clone(true);
@@ -76,10 +51,14 @@ App.controller('todoList', function (page, object) {
         API.auth(method, url, todoList, function (res, status) {
             if (status !== 200) {
                 App.dialog({
-                    title        : 'Sign in failed',
-                    text         : 'Looks like there was an issue signing in. Try again in a bit.',
+                    title        : 'Saving Failed',
+                    text         : 'Looks like there was an issue saving the todo list.',
                     okButton     : "Ok",
-                    cancelButton : 'Discard Changes'
+                    cancelButton : 'Discard',
+                }, function (tryAgain) {
+                    if (!tryAgain) {
+                        App.back();
+                    }
                 });
             } else {
                 if (method === "POST") {
@@ -87,6 +66,7 @@ App.controller('todoList', function (page, object) {
                 } else {
                     todoObserver(res);
                 }
+                App.back();
             }
         });
     };
@@ -116,6 +96,29 @@ App.controller('todoList', function (page, object) {
                     });
                 }
             });
+        });
+
+        $backBtn.on('click', function (event) {
+            todoList.items = [];
+            todoList.name = $appTitle.text();
+
+            children = $todos.children();
+            children.each(function (index, child) {
+                if (index === children.length-1) return false;
+
+                var todo = {};
+                todo.description = $(child).find('.app-input[type="input"]').val();
+                todo.completed = $(child).find('.app-input[type="checkbox"]').prop("checked");
+                todoList.items.push(todo);
+            });
+
+            if (isNewList) {
+                if (todoList.name.length > 0 && todoList.items.length > 0) {
+                    saveTodoList("POST", todoList);  
+                }
+            } else {
+                saveTodoList("PUT", todoList); 
+            }
         });
     };
 
