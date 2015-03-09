@@ -11,7 +11,6 @@ App.controller('home', function (page) {
                     cancelButton : 'Close'
                 });
             } else {
-                console.log(res);
                 res.forEach(function (todo) {
                     var obs = observable(todo);
                     App.lists.addList(obs);
