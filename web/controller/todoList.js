@@ -115,6 +115,8 @@ App.controller('todoList', function (page, object) {
             if (isNewList) {
                 if (todoList.name.length > 0 && todoList.items.length > 0) {
                     saveTodoList("POST", todoList);  
+                } else {
+                    App.back();
                 }
             } else {
                 saveTodoList("PUT", todoList); 
