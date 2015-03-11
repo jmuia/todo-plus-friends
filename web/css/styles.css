@@ -52,8 +52,9 @@
     display: none;
 }
 
-.app-android .android-add-button {
-    display: flex;
+
+
+.android-add-button-wrapper {
     height: 60px;
     width: 60px;
     position: absolute;
@@ -61,13 +62,25 @@
     right:  16px;
     background-color: #9b59b6;
     -webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.3);
-    box-shadow: 0 1px 5px rgba(0,0,0,0.3);
+    box-shadow: 0 3px 5px rgba(0,0,0,0.3);
     z-index: 2000;
     border-radius: 60px;
-    align-items: center;
-    justify-content: center;
     color: #F3F4F5;
     font-size: 30px;
+}
+
+.app-android .android-add-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    border-radius: 60px;
+}
+
+.app-android .android-add-button.active {
+    opacity: 1;
+    background-color: rgba(0,0,0,0.2);
 }
 
 .app-ios .android-add-button {
