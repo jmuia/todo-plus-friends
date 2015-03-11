@@ -3,9 +3,9 @@
 .todoList-page {}
 
 .todoList-page .app-button.right {
-    background-image: url('/img/group_add.png');
+    background-image: url('/img/manage.png');
     background-repeat: no-repeat;
-    background-size: 24px 24px;
+    background-size: 50px;
     background-position: center;
     width: 22px;
 }

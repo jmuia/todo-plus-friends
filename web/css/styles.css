@@ -46,6 +46,7 @@
     background-repeat: no-repeat;
     background-size: 20px;
     background-position: center;
+    padding-right: 20px;
 }
 
 .app-android .ios-add-button {
@@ -83,7 +84,7 @@
     background-color: rgba(0,0,0,0.2);
 }
 
-.app-ios .android-add-button {
+.app-ios .android-add-button-wrapper {
     display: none;
 }
 
