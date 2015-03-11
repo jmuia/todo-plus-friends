@@ -86,3 +86,42 @@
 .app-ios .android-add-button {
     display: none;
 }
+
+@-webkit-keyframes pulse {
+    0% {
+        background-color: #CCC;
+    }
+    25% {
+        background-color: #EEE;
+    }
+    50% {
+        background-color: #CCC;
+    }
+    75% {
+        background-color: #EEE;
+    }
+    100% {
+        background-color: #CCC;
+    }
+}
+
+.app-content .loading {
+    margin: 12px auto;
+    border: 8px solid #AAA;
+    height: 16px;
+    width: 16px;
+    background: #CCC;
+    border-radius: 16px;
+    -webkit-animation: pulse 2s ease-in-out 0s infinite;
+}
+
+.app-content .loading-wrapper {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    right: 0px;
+    margin: auto;
+    text-align: center;
+    color: #AAA;
+}

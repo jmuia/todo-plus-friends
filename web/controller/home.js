@@ -4,9 +4,11 @@ App.controller('home', function (page) {
 
     var $tmpl = $(page).find('ul li.app-button').remove();
     var $lists = $(page).find('ul.app-list');
+    var $spinner = $(page).find('.loading-wrapper');
 
     function fetchLists(username) {
         API.auth('GET','/users/'+username+'/todo-lists', '', function (res, status) {
+            $spinner.hide();
             if (status !== 200) {
                 App.dialog({
                     title        : 'Sign in failed',

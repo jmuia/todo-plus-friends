@@ -9,6 +9,7 @@ App.controller('todoList', function (page, object) {
     var $todos = $(page).find('.todos');
     var $shareBtn = $(page).find('.app-button.right');
     var $backBtn = $(page).find('.app-button.left');
+    var $loadingSpinner = $(page).find('.loading-wrapper');
     
     if (typeof(object.observer) === "undefined") {
         isNewList = true;
@@ -50,6 +51,9 @@ App.controller('todoList', function (page, object) {
 
         API.auth(method, url, todoList, function (res, status) {
             if (status !== 200) {
+                $loadingSpinner.hide();
+                $todos.show();
+                
                 App.dialog({
                     title        : 'Saving Failed',
                     text         : 'Looks like there was an issue saving the todo list.',
@@ -99,6 +103,9 @@ App.controller('todoList', function (page, object) {
         });
 
         $backBtn.on('click', function (event) {
+            $todos.hide();
+            $loadingSpinner.show();
+
             todoList.items = [];
             todoList.name = $appTitle.text();
 
