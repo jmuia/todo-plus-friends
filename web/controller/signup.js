@@ -1,6 +1,6 @@
 App.controller('signup', function (page) {
 
-    page.querySelector('#sign-in').addEventListener('click', function (event) {
+    $(page).find('#sign-in').on('click', function (event) {
         API.auth('POST','/users', '', function (res, status) {
             if (status !== 200) {
                 App.dialog({
@@ -13,4 +13,5 @@ App.controller('signup', function (page) {
             }
         });
     });
+    
 });
