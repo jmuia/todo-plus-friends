@@ -1,4 +1,7 @@
 App.controller('home', function (page) {
+    // Prevent user from navigating back to signup page
+    $(page).on('appBeforeBack', function() { return false; });
+
     var $tmpl = $(page).find('ul li.app-button').remove();
     var $lists = $(page).find('ul.app-list');
 
